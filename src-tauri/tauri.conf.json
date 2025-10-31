@@ -28,7 +28,7 @@
         {
           "identifier": "draggable-window",
           "windows": ["*"],
-          "permissions": ["core:window:allow-start-dragging"]
+          "permissions": ["core:window:allow-start-dragging", "process:default"]
         }
       ]
     }
