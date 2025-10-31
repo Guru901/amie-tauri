@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import "./App.css";
 import ContextWindow from "./components/context-window";
@@ -8,25 +8,60 @@ function App() {
   const isSettings =
     typeof window !== "undefined" && window.location.hash === "#settings";
 
+  // Initialize pet from localStorage, fallback to "cat"
+  const [pet, setPet] = useState<"hamster" | "cat">(() => {
+    const saved = localStorage.getItem("selectedPet");
+    return saved === "hamster" || saved === "cat" ? saved : "cat";
+  });
+
+  useEffect(() => {
+    // Listen for pet changes from settings window
+    const setupListener = async () => {
+      const unlisten = await getCurrentWindow().listen<{
+        pet: "hamster" | "cat";
+      }>("pet-changed", (event) => {
+        console.log("Received pet-changed event:", event.payload.pet);
+        setPet(event.payload.pet);
+      });
+
+      return unlisten;
+    };
+
+    const unlistenPromise = setupListener();
+
+    return () => {
+      unlistenPromise.then((unlisten) => unlisten());
+    };
+  }, []);
+
+  const handleSetPet = (newPet: "hamster" | "cat") => {
+    console.log("Setting pet to:", newPet);
+    setPet(newPet);
+    localStorage.setItem("selectedPet", newPet);
+  };
+
   return (
     <div className="bg-transparent">
       <ContextWindow />
-      {isSettings ? <Settings /> : <Pet />}
+      {isSettings ? (
+        <Settings pet={pet} setPet={handleSetPet} />
+      ) : (
+        <Pet pet={pet} />
+      )}
     </div>
   );
 }
 
 export default App;
 
-function Pet() {
-  const petSrc = import.meta.env.DEV ? "/pet.gif" : "pet.gif";
+function Pet({ pet }: { pet: "hamster" | "cat" }) {
+  const petSrc = import.meta.env.DEV ? `/${pet}.gif` : `${pet}.gif`;
 
   const onMouseDown = async (e: React.MouseEvent) => {
     e.preventDefault();
     await getCurrentWindow().startDragging();
   };
 
-  // Randomly select a float variant for the pet on initial render
   const floatVariantClass = useMemo(() => {
     const variant = Math.floor(Math.random() * 3);
     return `animate-float-${variant}`;
@@ -44,15 +79,11 @@ function Pet() {
         }}
         className={`select-none ${floatVariantClass}`}
         style={{
-          width: 100,
+          width: pet == "cat" ? 150 : 100,
           objectFit: "cover",
         }}
       />
       <style>{`
-        /* 
-          We'll animate between multiple randomly-generated keyframes for more natural, varied float. 
-          Each animation is created with slightly different x/y/scale/rotate values within sensible limits.
-        */
         @keyframes float-variant-0 {
           0%   { transform: translateY(0px) translateX(0px) scale(1) rotate(0deg); }
           35%  { transform: translateY(-14px) translateX(18px) scale(1.08) rotate(2deg);}

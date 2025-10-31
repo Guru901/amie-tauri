@@ -38,7 +38,9 @@
             "core:webview:allow-create-webview-window",
             "core:window:allow-get-all-windows",
             "core:window:default",
-            "core:window:allow-set-always-on-top"
+            "core:window:allow-set-always-on-top",
+            "core:event:allow-emit",
+            "core:event:default"
           ]
         }
       ]
