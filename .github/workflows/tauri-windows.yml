@@ -34,14 +34,17 @@ jobs:
       - name: Install Tauri CLI (global)
         run: bun add -g @tauri-apps/cli@^2
 
-      - name: Generate Windows icon.ico if missing
-        shell: bash
+      - name: Install ImageMagick (for ICO generation)
+        shell: pwsh
+        run: choco install imagemagick -y
+
+      - name: Generate Windows icon.ico (BMP, multi-size)
+        shell: pwsh
         run: |
-          if [ ! -f src-tauri/icons/icon.ico ]; then
-            echo "Generating src-tauri/icons/icon.ico from icon.png"
-            bun add -g png-to-ico@3
-            bun -e "import toIco from 'png-to-ico'; import { writeFileSync } from 'node:fs'; (async () => { const buf = await toIco(['src-tauri/icons/icon.png']); writeFileSync('src-tauri/icons/icon.ico', buf); })();"
-          fi
+          if (!(Test-Path 'src-tauri/icons')) { New-Item -ItemType Directory -Path 'src-tauri/icons' | Out-Null }
+          if (!(Test-Path 'src-tauri/icons/icon.png')) { throw 'src-tauri/icons/icon.png not found' }
+          if (Test-Path 'src-tauri/icons/icon.ico') { Remove-Item 'src-tauri/icons/icon.ico' -Force }
+          magick convert 'src-tauri/icons/icon.png' -define icon:auto-resize=16,24,32,48,64,256 -define icon:format=bmp 'src-tauri/icons/icon.ico'
 
       # Build and bundle the Windows app (MSI/NSIS/portable as configured by Tauri)
       - name: Tauri build (Windows)
