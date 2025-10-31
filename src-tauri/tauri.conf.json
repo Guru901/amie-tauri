@@ -32,7 +32,10 @@
             "core:window:allow-start-dragging",
             "process:default",
             "core:window:allow-create",
-            "core:webview:allow-create-webview-window"
+            "core:webview:allow-create-webview-window",
+            "core:window:allow-get-all-windows",
+            "core:window:default",
+            "core:window:allow-set-always-on-top"
           ]
         }
       ]
@@ -41,6 +44,6 @@
   "bundle": {
     "active": true,
     "targets": "all",
-    "icon": ["icons/icon.png", "icons/icon.ico"]
+    "icon": ["icons/icon.png"]
   }
 }

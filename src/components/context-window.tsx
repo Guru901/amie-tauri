@@ -68,7 +68,7 @@ export default function ContextWindow() {
 
   const handleSettings = async () => {
     try {
-      new WebviewWindow("new-window", {
+      new WebviewWindow("settings", {
         url: "#settings",
         title: "Settings",
         width: 400,
