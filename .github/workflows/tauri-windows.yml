@@ -1,0 +1,49 @@
+name: Build Windows (Tauri v2)
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+
+      - name: Cache Rust
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install Tauri CLI
+        run: npm i -g @tauri-apps/cli@^2
+
+      # Build and bundle the Windows app (MSI/NSIS/portable as configured by Tauri)
+      - name: Tauri build (Windows)
+        run: tauri build
+
+      # Upload bundled artifacts
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-bundles
+          path: |
+            src-tauri/target/*/bundle/**/*
+          if-no-files-found: error
