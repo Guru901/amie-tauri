@@ -15,14 +15,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: "20"
-          cache: "npm"
+          bun-version: "latest"
 
-      - name: Install frontend dependencies
-        run: npm ci
+      - name: Install frontend dependencies (bun)
+        run: bun install --frozen-lockfile
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
@@ -32,12 +31,12 @@ jobs:
       - name: Cache Rust
         uses: Swatinem/rust-cache@v2
 
-      - name: Install Tauri CLI
-        run: npm i -g @tauri-apps/cli@^2
+      - name: Install Tauri CLI (global)
+        run: bun add -g @tauri-apps/cli@^2
 
       # Build and bundle the Windows app (MSI/NSIS/portable as configured by Tauri)
       - name: Tauri build (Windows)
-        run: tauri build
+        run: bunx tauri build
 
       # Upload bundled artifacts
       - name: Upload artifacts
