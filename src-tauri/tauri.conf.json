@@ -29,6 +29,9 @@
           "identifier": "draggable-window",
           "windows": ["*"],
           "permissions": [
+            "autostart:allow-enable",
+            "autostart:allow-disable",
+            "autostart:allow-is-enabled",
             "core:window:allow-start-dragging",
             "process:default",
             "core:window:allow-create",

@@ -1,1 +1,221 @@
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.32s
+   0.210947959s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint: stale: changed "/Users/guru/Developer/dekstop-pet-tauri/src-tauri/capabilities"
+   0.211197209s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint:           (vs) "/Users/guru/Developer/dekstop-pet-tauri/src-tauri/target/debug/build/amie-5b3c27b55b3eaf90/output"
+   0.211203875s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1761939966, nanos: 202868951 } < FileTime { seconds: 1761939967, nanos: 155768763 }
+   0.252293875s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint: fingerprint error for amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri)/Check { test: false }/TargetInner { ..: lib_target("amie_lib", ["staticlib", "cdylib", "rlib"], "/Users/guru/Developer/dekstop-pet-tauri/src-tauri/src/lib.rs", Edition2021) }
+   0.252626084s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/dekstop-pet-tauri/src-tauri/target/debug/.fingerprint/amie-d3a63f7fcde203fa/lib-amie_lib`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.270040625s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint dirty for amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri)/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/guru/Developer/dekstop-pet-tauri/src-tauri/build.rs", Edition2021) }
+   0.270054417s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="build-script-build"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/Users/guru/Developer/dekstop-pet-tauri/src-tauri/target/debug/build/amie-5b3c27b55b3eaf90/output", reference_mtime: FileTime { seconds: 1761939966, nanos: 202868951 }, stale: "/Users/guru/Developer/dekstop-pet-tauri/src-tauri/capabilities", stale_mtime: FileTime { seconds: 1761939967, nanos: 155768763 } }))
+   0.308130042s  INFO prepare_target{force=false package_id=tauri-plugin-autostart v2.5.1 target="tauri_plugin_autostart"}: cargo::core::compiler::fingerprint: fingerprint error for tauri-plugin-autostart v2.5.1/Check { test: false }/TargetInner { ..: lib_target("tauri_plugin_autostart", ["lib"], "/Users/guru/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-autostart-2.5.1/src/lib.rs", Edition2021) }
+   0.308145167s  INFO prepare_target{force=false package_id=tauri-plugin-autostart v2.5.1 target="tauri_plugin_autostart"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/dekstop-pet-tauri/src-tauri/target/debug/.fingerprint/tauri-plugin-autostart-f23e4a51b9ee3f50/lib-tauri_plugin_autostart`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.309471875s  INFO prepare_target{force=false package_id=auto-launch v0.5.0 target="auto_launch"}: cargo::core::compiler::fingerprint: fingerprint error for auto-launch v0.5.0/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("auto_launch", ["lib"], "/Users/guru/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto-launch-0.5.0/src/lib.rs", Edition2021) }
+   0.309481500s  INFO prepare_target{force=false package_id=auto-launch v0.5.0 target="auto_launch"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/dekstop-pet-tauri/src-tauri/target/debug/.fingerprint/auto-launch-92c7f59546ad2218/lib-auto_launch`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.309689167s  INFO prepare_target{force=false package_id=dirs v4.0.0 target="dirs"}: cargo::core::compiler::fingerprint: fingerprint error for dirs v4.0.0/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("dirs", ["lib"], "/Users/guru/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dirs-4.0.0/src/lib.rs", Edition2015) }
+   0.309695500s  INFO prepare_target{force=false package_id=dirs v4.0.0 target="dirs"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/dekstop-pet-tauri/src-tauri/target/debug/.fingerprint/dirs-8bfd41075fa59450/lib-dirs`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.310023750s  INFO prepare_target{force=false package_id=dirs-sys v0.3.7 target="dirs_sys"}: cargo::core::compiler::fingerprint: fingerprint error for dirs-sys v0.3.7/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("dirs_sys", ["lib"], "/Users/guru/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dirs-sys-0.3.7/src/lib.rs", Edition2015) }
+   0.310030959s  INFO prepare_target{force=false package_id=dirs-sys v0.3.7 target="dirs_sys"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/dekstop-pet-tauri/src-tauri/target/debug/.fingerprint/dirs-sys-a200826a414d5051/lib-dirs_sys`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.311428209s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint: fingerprint error for amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri)/Check { test: true }/TargetInner { ..: lib_target("amie_lib", ["staticlib", "cdylib", "rlib"], "/Users/guru/Developer/dekstop-pet-tauri/src-tauri/src/lib.rs", Edition2021) }
+   0.311436500s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/dekstop-pet-tauri/src-tauri/target/debug/.fingerprint/amie-9ec61e323e361027/test-lib-amie_lib`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.312282292s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint: fingerprint error for amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri)/Check { test: false }/TargetInner { name: "amie", doc: true, ..: with_path("/Users/guru/Developer/dekstop-pet-tauri/src-tauri/src/main.rs", Edition2021) }
+   0.312288334s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/dekstop-pet-tauri/src-tauri/target/debug/.fingerprint/amie-9d0bff4e8f086e10/bin-amie`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.313051125s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint: fingerprint error for amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri)/Check { test: true }/TargetInner { name: "amie", doc: true, ..: with_path("/Users/guru/Developer/dekstop-pet-tauri/src-tauri/src/main.rs", Edition2021) }
+   0.313056000s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/dekstop-pet-tauri/src-tauri/target/debug/.fingerprint/amie-082caa655cc2574f/test-bin-amie`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+    Checking dirs-sys v0.3.7
+   Compiling amie v0.1.0 (/Users/guru/Developer/dekstop-pet-tauri/src-tauri)
+    Checking dirs v4.0.0
+    Checking auto-launch v0.5.0
+    Checking tauri-plugin-autostart v2.5.1
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.09s
