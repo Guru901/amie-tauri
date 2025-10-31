@@ -116,7 +116,7 @@ export default function ContextWindow() {
   return (
     <div
       ref={menuRef}
-      className="fixed z-[9999] min-w-[140px] rounded border border-neutral-700/60 bg-neutral-900/95 text-neutral-100 shadow-xl backdrop-blur-sm"
+      className="fixed z-9999 min-w-[140px] rounded border border-neutral-700/60 bg-neutral-900/95 text-neutral-100 shadow-xl backdrop-blur-sm"
       style={{ left: `${position.x}px`, top: `${position.y}px` }}
     >
       <ul className="py-0.5 text-xs m-0 list-none">
