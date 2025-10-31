@@ -68,35 +68,14 @@ export default function ContextWindow() {
 
   const handleSettings = async () => {
     try {
-      // Check if settings window already exists
-      const allWindows = WebviewWindow.getAll();
-      const settingsWindow = (await allWindows).find(
-        (w) => w.label === "settings"
-      );
-
-      if (settingsWindow) {
-        // If it exists, focus it
-        await settingsWindow.setFocus();
-      } else {
-        // Create new settings window
-        const newWindow = new WebviewWindow("settings", {
-          url: "/settings", // or your settings route
-          title: "Settings",
-          width: 600,
-          height: 400,
-          resizable: true,
-          center: true,
-        });
-
-        // Listen for window creation
-        newWindow.once("tauri://created", () => {
-          console.log("Settings window created");
-        });
-
-        newWindow.once("tauri://error", (e) => {
-          console.error("Error creating settings window:", e);
-        });
-      }
+      new WebviewWindow("new-window", {
+        url: "#settings",
+        title: "Settings",
+        width: 400,
+        height: 300,
+        resizable: true,
+        alwaysOnTop: true,
+      });
       setIsOpen(false);
     } catch (error) {
       console.error("Failed to open settings window:", error);

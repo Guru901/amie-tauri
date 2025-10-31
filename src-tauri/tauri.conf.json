@@ -28,7 +28,12 @@
         {
           "identifier": "draggable-window",
           "windows": ["*"],
-          "permissions": ["core:window:allow-start-dragging", "process:default"]
+          "permissions": [
+            "core:window:allow-start-dragging",
+            "process:default",
+            "core:window:allow-create",
+            "core:webview:allow-create-webview-window"
+          ]
         }
       ]
     }
