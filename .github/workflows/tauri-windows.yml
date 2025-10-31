@@ -34,6 +34,15 @@ jobs:
       - name: Install Tauri CLI (global)
         run: bun add -g @tauri-apps/cli@^2
 
+      - name: Generate Windows icon.ico if missing
+        shell: bash
+        run: |
+          if [ ! -f src-tauri/icons/icon.ico ]; then
+            echo "Generating src-tauri/icons/icon.ico from icon.png"
+            bun add -g png-to-ico@3
+            bun -e "import toIco from 'png-to-ico'; import { writeFileSync } from 'node:fs'; (async () => { const buf = await toIco(['src-tauri/icons/icon.png']); writeFileSync('src-tauri/icons/icon.ico', buf); })();"
+          fi
+
       # Build and bundle the Windows app (MSI/NSIS/portable as configured by Tauri)
       - name: Tauri build (Windows)
         run: bunx tauri build
