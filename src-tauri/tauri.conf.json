@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "amie",
+  "productName": "Amie",
   "version": "0.1.0",
   "identifier": "com.guru.amie",
   "build": {
@@ -19,7 +19,8 @@
         "transparent": true,
         "decorations": false,
         "alwaysOnTop": true,
-        "shadow": false
+        "shadow": false,
+        "visibleOnAllWorkspaces": true
       }
     ],
     "security": {
@@ -50,6 +51,6 @@
   "bundle": {
     "active": true,
     "targets": "all",
-    "icon": ["icons/icon.png", "icons/icon.ico"]
+    "icon": ["icons/icon.png"]
   }
 }
