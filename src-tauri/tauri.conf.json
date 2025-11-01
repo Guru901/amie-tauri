@@ -13,13 +13,13 @@
     "macOSPrivateApi": true,
     "windows": [
       {
-        "title": "amie",
+        "title": "Amie",
         "width": 200,
         "height": 200,
         "transparent": true,
         "decorations": false,
         "alwaysOnTop": true,
-        "shadow": false,
+        "shadow": true,
         "visibleOnAllWorkspaces": true
       }
     ],

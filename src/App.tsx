@@ -82,51 +82,24 @@ function Pet({ pet }: { pet: string }) {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
+    <div className="w-screen h-screen flex items-center justify-center relative">
       <img
         src={petSrc}
         alt="pet"
         draggable={false}
         onMouseDown={onMouseDown}
-        onContextMenu={(e) => {
-          e.preventDefault();
-        }}
-        className={`select-none ${floatVariantClass} transition-opacity duration-300`}
+        onContextMenu={(e) => e.preventDefault()}
+        className={`
+        select-none 
+        ${floatVariantClass}
+        transition-all duration-500 ease-in-out
+        ${isVisible ? "opacity-100" : "opacity-0"}
+      `}
         style={{
-          width: pet == "cat" ? 150 : 100,
-          objectFit: "cover",
-          opacity: isVisible ? 1 : 0,
+          width: pet === "cat" ? 150 : 100,
+          objectFit: "contain",
         }}
       />
-      <style>{`
-        @keyframes float-variant-0 {
-          0%   { transform: translateY(0px) translateX(0px) scale(1) rotate(0deg); }
-          35%  { transform: translateY(-14px) translateX(18px) scale(1.08) rotate(2deg);}
-          60%  { transform: translateY(-27px) translateX(10px) scale(1.1) rotate(-2deg);}
-          100% { transform: translateY(-18px) translateX(22px) scale(1.08) rotate(0deg);}
-        }
-        @keyframes float-variant-1 {
-          0%   { transform: translateY(0px) translateX(0px) scale(1) rotate(1deg);}
-          24%  { transform: translateY(-12px) translateX(-16px) scale(1.04) rotate(0deg);}
-          60%  { transform: translateY(-25px) translateX(12px) scale(1.12) rotate(-3deg);}
-          100% { transform: translateY(-19px) translateX(-20px) scale(1.06) rotate(1deg);}
-        }
-        @keyframes float-variant-2 {
-          0%   { transform: translateY(0px) translateX(0px) scale(1) rotate(-1deg);}
-          27%  { transform: translateY(-17px) translateX(12px) scale(1.06) rotate(2deg);}
-          77%  { transform: translateY(-23px) translateX(-16px) scale(1.13) rotate(-2deg);}
-          100% { transform: translateY(-15px) translateX(22px) scale(1.09) rotate(-1deg);}
-        }
-        .animate-float-0 {
-          animation: float-variant-0 3.4s ease-in-out infinite alternate;
-        }
-        .animate-float-1 {
-          animation: float-variant-1 2.8s ease-in-out infinite alternate;
-        }
-        .animate-float-2 {
-          animation: float-variant-2 3.2s ease-in-out infinite alternate;
-        }
-      `}</style>
     </div>
   );
 }
