@@ -3,7 +3,6 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import "./App.css";
 import ContextWindow from "./components/context-window";
 import Settings from "./components/settings";
-import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 
 function App() {
   const isSettings =
@@ -65,6 +64,12 @@ export default App;
 
 function Pet({ pet }: { pet: string }) {
   const petSrc = import.meta.env.DEV ? `/${pet}.gif` : `${pet}.gif`;
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Trigger fade-in animation when component mounts
+    setIsVisible(true);
+  }, []);
 
   const onMouseDown = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -86,10 +91,11 @@ function Pet({ pet }: { pet: string }) {
         onContextMenu={(e) => {
           e.preventDefault();
         }}
-        className={`select-none ${floatVariantClass}`}
+        className={`select-none ${floatVariantClass} transition-opacity duration-300`}
         style={{
           width: pet == "cat" ? 150 : 100,
           objectFit: "cover",
+          opacity: isVisible ? 1 : 0,
         }}
       />
       <style>{`

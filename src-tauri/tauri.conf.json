@@ -40,7 +40,8 @@
             "core:window:default",
             "core:window:allow-set-always-on-top",
             "core:event:allow-emit",
-            "core:event:default"
+            "core:event:default",
+            "core:window:allow-close"
           ]
         }
       ]

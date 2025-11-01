@@ -50,23 +50,47 @@ export default function Settings({ pet, setPet }: SettingsProps) {
     setPet(newPet);
 
     if (e.target.value === "all") {
-      new WebviewWindow("second-pet", {
-        url: `#${currentPet === "cat" ? "hamster" : "cat"}`,
-        width: 200,
-        title: currentPet === "cat" ? "hamster" : "cat",
-        height: 200,
-        resizable: true,
-        alwaysOnTop: true,
-        transparent: true,
-        decorations: false,
-      });
-    } else {
-      // Save to localStorage so it persists across window reloads
-      localStorage.setItem("selectedPet", newPet);
-
-      // Reload the main window to apply the change
+      // Check if window already exists before creating
       (async () => {
         const windows = await getAllWebviewWindows();
+        const secondPetWindow = windows.find((w) => w.label === "second-pet");
+
+        if (!secondPetWindow) {
+          try {
+            new WebviewWindow("second-pet", {
+              url: `#${currentPet === "cat" ? "hamster" : "cat"}`,
+              width: 200,
+              title: currentPet === "cat" ? "hamster" : "cat",
+              height: 200,
+              resizable: true,
+              alwaysOnTop: true,
+              transparent: true,
+              decorations: false,
+            });
+          } catch (error) {
+            console.error("Failed to create second pet window:", error);
+          }
+        }
+      })();
+    } else {
+      // Close second pet window when switching away from "all" mode
+      (async () => {
+        const windows = await getAllWebviewWindows();
+        console.log("windows", windows);
+        const secondPetWindow = windows.find((w) => w.label === "second-pet");
+        console.log("secondPetWindow", secondPetWindow);
+        if (secondPetWindow) {
+          try {
+            await secondPetWindow.close();
+          } catch (error) {
+            console.error("Failed to close second pet window:", error);
+          }
+        }
+
+        // Save to localStorage so it persists across window reloads
+        localStorage.setItem("selectedPet", newPet);
+
+        // Reload the main window to apply the change
         const mainWindow = windows.find((w) => w.label === "main");
         if (mainWindow) {
           await mainWindow.emit("pet-changed", { pet: newPet });
