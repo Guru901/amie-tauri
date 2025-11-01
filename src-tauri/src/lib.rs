@@ -27,8 +27,9 @@ pub fn run() {
                 ns_window.setHidesOnDeactivate_(NO); // don’t hide when switching apps
             }
 
-            Ok(())
         }
+
+        Ok(())
 
     })
         .plugin(tauri_plugin_autostart::Builder::new().build())
