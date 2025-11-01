@@ -1,10 +1,13 @@
-import { getAllWebviewWindows } from "@tauri-apps/api/webviewWindow";
+import {
+  getAllWebviewWindows,
+  WebviewWindow,
+} from "@tauri-apps/api/webviewWindow";
 import { useEffect, useState } from "react";
 import { disable, enable, isEnabled } from "@tauri-apps/plugin-autostart";
 
 type SettingsProps = {
-  pet: "hamster" | "cat";
-  setPet: (pet: "hamster" | "cat") => void;
+  pet: string;
+  setPet: (pet: string) => void;
 };
 
 export default function Settings({ pet, setPet }: SettingsProps) {
@@ -42,21 +45,34 @@ export default function Settings({ pet, setPet }: SettingsProps) {
   };
 
   const handlePetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newPet = e.target.value as "hamster" | "cat";
-    console.log(newPet);
+    const newPet = e.target.value;
+    const currentPet = pet;
     setPet(newPet);
 
-    // Save to localStorage so it persists across window reloads
-    localStorage.setItem("selectedPet", newPet);
+    if (e.target.value === "all") {
+      new WebviewWindow("second-pet", {
+        url: `#${currentPet === "cat" ? "hamster" : "cat"}`,
+        width: 200,
+        title: currentPet === "cat" ? "hamster" : "cat",
+        height: 200,
+        resizable: true,
+        alwaysOnTop: true,
+        transparent: true,
+        decorations: false,
+      });
+    } else {
+      // Save to localStorage so it persists across window reloads
+      localStorage.setItem("selectedPet", newPet);
 
-    // Reload the main window to apply the change
-    (async () => {
-      const windows = await getAllWebviewWindows();
-      const mainWindow = windows.find((w) => w.label === "main");
-      if (mainWindow) {
-        await mainWindow.emit("pet-changed", { pet: newPet });
-      }
-    })();
+      // Reload the main window to apply the change
+      (async () => {
+        const windows = await getAllWebviewWindows();
+        const mainWindow = windows.find((w) => w.label === "main");
+        if (mainWindow) {
+          await mainWindow.emit("pet-changed", { pet: newPet });
+        }
+      })();
+    }
   };
 
   return (
@@ -85,6 +101,7 @@ export default function Settings({ pet, setPet }: SettingsProps) {
           <select value={pet} onChange={handlePetChange}>
             <option value="hamster">Hamster</option>
             <option value="cat">Cat</option>
+            <option value="all">All</option>
           </select>
         </div>
       </div>

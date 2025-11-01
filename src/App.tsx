@@ -3,15 +3,20 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import "./App.css";
 import ContextWindow from "./components/context-window";
 import Settings from "./components/settings";
+import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 
 function App() {
   const isSettings =
     typeof window !== "undefined" && window.location.hash === "#settings";
 
+  const isCat =
+    typeof window !== "undefined" && window.location.hash === "#cat";
+  const isHamster =
+    typeof window !== "undefined" && window.location.hash === "#hamster";
+
   // Initialize pet from localStorage, fallback to "cat"
-  const [pet, setPet] = useState<"hamster" | "cat">(() => {
-    const saved = localStorage.getItem("selectedPet");
-    return saved === "hamster" || saved === "cat" ? saved : "cat";
+  const [pet, setPet] = useState<string>(() => {
+    return localStorage.getItem("selectedPet") || "cat";
   });
 
   useEffect(() => {
@@ -34,10 +39,11 @@ function App() {
     };
   }, []);
 
-  const handleSetPet = (newPet: "hamster" | "cat") => {
-    console.log("Setting pet to:", newPet);
+  const handleSetPet = (newPet: string) => {
     setPet(newPet);
-    localStorage.setItem("selectedPet", newPet);
+    if (newPet !== "all") {
+      localStorage.setItem("selectedPet", newPet);
+    }
   };
 
   return (
@@ -46,15 +52,18 @@ function App() {
       {isSettings ? (
         <Settings pet={pet} setPet={handleSetPet} />
       ) : (
-        <Pet pet={pet} />
+        !isCat && !isHamster && <Pet pet={pet} />
       )}
+
+      {isCat && <Pet pet="cat" />}
+      {isHamster && <Pet pet="hamster" />}
     </div>
   );
 }
 
 export default App;
 
-function Pet({ pet }: { pet: "hamster" | "cat" }) {
+function Pet({ pet }: { pet: string }) {
   const petSrc = import.meta.env.DEV ? `/${pet}.gif` : `${pet}.gif`;
 
   const onMouseDown = async (e: React.MouseEvent) => {
