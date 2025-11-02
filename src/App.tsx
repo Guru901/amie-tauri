@@ -3,21 +3,30 @@ import "./App.css";
 import { Pet } from "./components/pet";
 import { ContextMenu, ContextMenuTrigger } from "./components/ui/context-menu";
 import ContextMenuComponent from "./components/context-menu";
+import Settings from "./components/settings";
 
 function App() {
-  const [isCat, setIsCat] = useState(true);
-  const [isHamster, setIsHamster] = useState(false);
-  const [isRedPanda, setIsRedPanda] = useState(false);
+  const isSettings =
+    typeof window !== "undefined" && window.location.hash === "#settings";
+
+  const isCat =
+    typeof window !== "undefined" && window.location.hash === "#cat";
+  const isHamster =
+    typeof window !== "undefined" && window.location.hash === "#hamster";
+  const isRedPanda =
+    typeof window !== "undefined" && window.location.hash === "#red-panda";
+
+  const [pet, setPet] = useState("cat");
 
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
         <div>
-          {/* {isSettings ? (
-          <Settings pet={pet} setPet={handleSetPet} />
-        ) : (
-          !isCat && !isHamster && !isRedPanda && <Pet pet={pet} />
-        )} */}
+          {isSettings ? (
+            <Settings />
+          ) : (
+            !isCat && !isHamster && !isRedPanda && <Pet pet={pet} />
+          )}
 
           {isCat && <Pet pet="cat" />}
           {isHamster && <Pet pet="hamster" />}
