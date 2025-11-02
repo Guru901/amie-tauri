@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 import { Pet } from "./components/pet";
-import { Button } from "./components/ui/button";
+import { ContextMenu, ContextMenuTrigger } from "./components/ui/context-menu";
+import ContextMenuComponent from "./components/context-menu";
 
 function App() {
   const [isCat, setIsCat] = useState(true);
@@ -9,17 +10,22 @@ function App() {
   const [isRedPanda, setIsRedPanda] = useState(false);
 
   return (
-    <div className="bg-transparent">
-      {/* {isSettings ? (
-        <Settings pet={pet} setPet={handleSetPet} />
-      ) : (
-        !isCat && !isHamster && !isRedPanda && <Pet pet={pet} />
-      )} */}
+    <ContextMenu>
+      <ContextMenuTrigger asChild>
+        <div>
+          {/* {isSettings ? (
+          <Settings pet={pet} setPet={handleSetPet} />
+        ) : (
+          !isCat && !isHamster && !isRedPanda && <Pet pet={pet} />
+        )} */}
 
-      {isCat && <Pet pet="cat" />}
-      {isHamster && <Pet pet="hamster" />}
-      {isRedPanda && <Pet pet="red-panda" />}
-    </div>
+          {isCat && <Pet pet="cat" />}
+          {isHamster && <Pet pet="hamster" />}
+          {isRedPanda && <Pet pet="red-panda" />}
+        </div>
+      </ContextMenuTrigger>
+      <ContextMenuComponent />
+    </ContextMenu>
   );
 }
 

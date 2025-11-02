@@ -27,7 +27,6 @@ export function Pet({ pet }: { pet: string }) {
         alt="pet"
         draggable={false}
         onMouseDown={onMouseDown}
-        onContextMenu={(e) => e.preventDefault()}
         className={`
           select-none 
           ${floatVariantClass}
