@@ -1,16 +1,104 @@
-    Blocking waiting for file lock on build directory
-   0.910048084s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint: stale: changed "/Users/guru/Developer/amie-tauri/src-tauri/tauri.conf.json"
-   0.910081125s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint:           (vs) "/Users/guru/Developer/amie-tauri/src-tauri/target/debug/build/amie-4060dd9db967b710/output"
-   0.910088167s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1762112456, nanos: 737286343 } < FileTime { seconds: 1762112851, nanos: 72858450 }
-   0.980770500s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint: fingerprint dirty for amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)/Check { test: false }/TargetInner { ..: lib_target("amie_lib", ["staticlib", "cdylib", "rlib"], "/Users/guru/Developer/amie-tauri/src-tauri/src/lib.rs", Edition2021) }
-   0.980793584s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleDepFingerprint { name: "build_script_build" })
-   0.982908875s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint dirty for amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/guru/Developer/amie-tauri/src-tauri/build.rs", Edition2021) }
-   0.982922000s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="build-script-build"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/Users/guru/Developer/amie-tauri/src-tauri/target/debug/build/amie-4060dd9db967b710/output", reference_mtime: FileTime { seconds: 1762112456, nanos: 737286343 }, stale: "/Users/guru/Developer/amie-tauri/src-tauri/tauri.conf.json", stale_mtime: FileTime { seconds: 1762112851, nanos: 72858450 } }))
-   1.117210584s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint: fingerprint dirty for amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)/Check { test: true }/TargetInner { ..: lib_target("amie_lib", ["staticlib", "cdylib", "rlib"], "/Users/guru/Developer/amie-tauri/src-tauri/src/lib.rs", Edition2021) }
-   1.117230500s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleDepFingerprint { name: "build_script_build" })
-   1.118364792s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint: fingerprint dirty for amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)/Check { test: false }/TargetInner { name: "amie", doc: true, ..: with_path("/Users/guru/Developer/amie-tauri/src-tauri/src/main.rs", Edition2021) }
-   1.118374459s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleDepFingerprint { name: "amie_lib" })
-   1.119108667s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint: fingerprint dirty for amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)/Check { test: true }/TargetInner { name: "amie", doc: true, ..: with_path("/Users/guru/Developer/amie-tauri/src-tauri/src/main.rs", Edition2021) }
-   1.119115792s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleDepFingerprint { name: "amie_lib" })
-   Compiling amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.84s
+   0.594387000s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint: fingerprint error for amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)/Check { test: false }/TargetInner { ..: lib_target("amie_lib", ["staticlib", "cdylib", "rlib"], "/Users/guru/Developer/amie-tauri/src-tauri/src/lib.rs", Edition2021) }
+   0.594725000s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/amie-tauri/src-tauri/target/debug/.fingerprint/amie-8e3b01bab0f8ee62/lib-amie_lib`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.693179542s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint: fingerprint error for amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)/Check { test: true }/TargetInner { ..: lib_target("amie_lib", ["staticlib", "cdylib", "rlib"], "/Users/guru/Developer/amie-tauri/src-tauri/src/lib.rs", Edition2021) }
+   0.693195750s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie_lib"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/amie-tauri/src-tauri/target/debug/.fingerprint/amie-48dedf8ef1c1ecb4/test-lib-amie_lib`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.694270250s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint: fingerprint error for amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)/Check { test: false }/TargetInner { name: "amie", doc: true, ..: with_path("/Users/guru/Developer/amie-tauri/src-tauri/src/main.rs", Edition2021) }
+   0.694279834s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/amie-tauri/src-tauri/target/debug/.fingerprint/amie-5d9d303ee81bd9d9/bin-amie`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.695008042s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint: fingerprint error for amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)/Check { test: true }/TargetInner { name: "amie", doc: true, ..: with_path("/Users/guru/Developer/amie-tauri/src-tauri/src/main.rs", Edition2021) }
+   0.695015625s  INFO prepare_target{force=false package_id=amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri) target="amie"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/guru/Developer/amie-tauri/src-tauri/target/debug/.fingerprint/amie-48f8b999ed1e06b6/test-bin-amie`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+    Checking amie v0.1.0 (/Users/guru/Developer/amie-tauri/src-tauri)
+error: could not compile `amie` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `amie` (lib test) due to 1 previous error
