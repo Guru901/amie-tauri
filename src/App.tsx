@@ -16,7 +16,26 @@ function App() {
   const isRedPanda =
     typeof window !== "undefined" && window.location.hash === "#red-panda";
 
-  const [pet, setPet] = useState("cat");
+  const [pet] = useState(() => {
+    try {
+      if (typeof window !== "undefined") {
+        const raw = window.localStorage.getItem("selectedPets");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (
+            Array.isArray(parsed) &&
+            parsed.length > 0 &&
+            typeof parsed[0] === "string"
+          ) {
+            return parsed[0];
+          }
+        }
+      }
+    } catch (_) {
+      return "cat";
+    }
+    return "cat";
+  });
 
   return (
     <ContextMenu>

@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 import { Label } from "./ui/label";
 import { Switch } from "./ui/switch";
-import { getAllWebviewWindows } from "@tauri-apps/api/webviewWindow";
+import {
+  getAllWebviewWindows,
+  WebviewWindow,
+} from "@tauri-apps/api/webviewWindow";
 import { disable, enable, isEnabled } from "@tauri-apps/plugin-autostart";
 
 export default function Settings() {
-  const [currentPet, setCurrentPet] = useState<string[]>(["cat", "hamster"]);
+  const [currentPet, setCurrentPet] = useState<string[]>(["cat"]);
   const [alwaysOnTop, setAlwaysOnTop] = useState<boolean | undefined>(
     undefined
   );
@@ -54,6 +57,74 @@ export default function Settings() {
     }
   };
 
+  const handlePetChange = async (value: string[]) => {
+    try {
+      const allowedPets = new Set(["cat", "hamster", "red-panda"]);
+
+      // sanitize, dedupe, and validate incoming values
+      let next = Array.from(new Set(value.filter((v) => allowedPets.has(v))));
+      if (next.length === 0) {
+        next = ["cat"]; // ensure at least one pet is selected
+      }
+
+      const windows = await getAllWebviewWindows();
+
+      // Close windows for pets that were deselected
+      await Promise.all(
+        currentPet
+          .filter((p) => !next.includes(p))
+          .map(async (p) => {
+            const win = windows.find((w) => w.label === p);
+            if (win) {
+              try {
+                await win.close();
+              } catch (err) {
+                console.warn(`Failed to close window for ${p}:`, err);
+              }
+            }
+          })
+      );
+
+      // Open windows for newly selected pets (if not already open)
+      await Promise.all(
+        next
+          .filter((p) => !currentPet.includes(p))
+          .map(async (p) => {
+            const existing = windows.find((w) => w.label === p);
+            if (!existing) {
+              try {
+                new WebviewWindow(p, {
+                  url: `#${p}`,
+                  width: 200,
+                  title: p,
+                  height: 150,
+                  resizable: true,
+                  alwaysOnTop: true,
+                  transparent: true,
+                  decorations: false,
+                });
+              } catch (err) {
+                console.warn(`Failed to open window for ${p}:`, err);
+              }
+            }
+          })
+      );
+
+      setCurrentPet(next);
+
+      // persist selection
+      try {
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem("selectedPets", JSON.stringify(next));
+        }
+      } catch (storageErr) {
+        console.warn("Failed to persist selected pets:", storageErr);
+      }
+    } catch (error) {
+      console.error("Failed to change pets:", error);
+    }
+  };
+
   return (
     <div className="bg-background w-screen h-screen p-4 text-neutral-100">
       <h2 className="text-lg font-semibold mb-3">Settings</h2>
@@ -79,7 +150,7 @@ export default function Settings() {
           <ToggleGroup
             type="multiple"
             value={currentPet}
-            onValueChange={setCurrentPet}
+            onValueChange={handlePetChange}
           >
             <ToggleGroupItem value="hamster">Hamster</ToggleGroupItem>
             <ToggleGroupItem value="cat">Cat</ToggleGroupItem>
