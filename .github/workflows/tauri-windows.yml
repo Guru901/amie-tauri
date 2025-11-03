@@ -1,0 +1,60 @@
+name: Build Windows (Tauri v2)
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "latest"
+
+      - name: Install frontend dependencies (bun)
+        run: bun install --frozen-lockfile
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+
+      - name: Cache Rust
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install Tauri CLI (global)
+        run: bun add -g @tauri-apps/cli@^2
+
+      - name: Install ImageMagick (for ICO generation)
+        shell: pwsh
+        run: choco install imagemagick -y
+
+      - name: Generate Windows icon.ico (BMP, multi-size)
+        shell: pwsh
+        run: |
+          if (!(Test-Path 'src-tauri/icons')) { New-Item -ItemType Directory -Path 'src-tauri/icons' | Out-Null }
+          if (!(Test-Path 'src-tauri/icons/icon.png')) { throw 'src-tauri/icons/icon.png not found' }
+          if (Test-Path 'src-tauri/icons/icon.ico') { Remove-Item 'src-tauri/icons/icon.ico' -Force }
+          magick convert 'src-tauri/icons/icon.png' -define icon:auto-resize=16,24,32,48,64,256 -define icon:format=bmp 'src-tauri/icons/icon.ico'
+
+      # Build and bundle the Windows app (MSI/NSIS/portable as configured by Tauri)
+      - name: Tauri build (Windows)
+        run: bunx tauri build
+
+      # Upload bundled artifacts
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-bundles
+          path: |
+            src-tauri/target/*/bundle/**/*
+          if-no-files-found: error
